@@ -44,7 +44,7 @@ while True:
             debug()
 
         else: 
-             raise ValueError("Pilihan Tidak Valid")
+            raise ValueError("Pilihan Tidak Valid")
     
     except ValueError as e: 
         print("=" * 75)
