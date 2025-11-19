@@ -5,7 +5,15 @@ import admin
 
 from auth import register, login
 from fungsi.utilitas import clear
-from admin.menuAdmin import debug
+from admin.menuAdmin import menuAdmin
+
+def menu_debug(): 
+    print("Pilih menu yang anda inginkan")
+    print("1 - Debug MenuAdmin")
+
+    pilih = input("> ")
+    if pilih == "1": 
+        menuAdmin()
 
 # KODE MAIN
 while True:
@@ -36,13 +44,10 @@ while True:
 
         if pilih_menu == "1": 
             login()
-
         elif pilih_menu == "2": 
             register()
-        
         elif pilih_menu == "3": 
-            debug()
-
+            menu_debug()
         else: 
             raise ValueError("Pilihan Tidak Valid")
     
@@ -51,3 +56,4 @@ while True:
         print(e)
         print("=" * 75)
         clear()
+
