@@ -20,7 +20,7 @@ dataPenyewa = {
     }
 }
 
-# Lanjut
+# Lanjut lanjut
 
 # dict dummy tagihan
 # tagihan = {
