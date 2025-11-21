@@ -202,20 +202,72 @@ def editPenyewa():
                                     print("=" * 75)
                                     clear()
                         else: 
+                            clear()
                             raise ValueError("Pilihan Tidak Valid!")
-        
+
         except ValueError as e: 
             print("=" * 75)
             print(e)
             print("=" * 75)
 
-
-        # clear()
-
-    # pass
-
 def hapusPenyewa(): 
-    pass
+    while True: 
+        try: 
+            global dataPenyewa
+            selesai_delete = False
+            print("=" * 75)
+            print("HAPUS PENYEWA")
+            print("=" * 75)
+
+            print(f"{'ID Penyewa':<15} {'Nama Lengkap':<25} {'Kontak':<15} {'Tanggal Gabung':<20} {'Status':<15} {'Unit':<10} {'Kamar':<10}")
+            for id_penyewa, data in dataPenyewa.items(): 
+                print(f"{str(id_penyewa):<15} {data['nama']:<25} {data['kontak']:<15} {data['tanggal_gabung']:<20} {data['status']:<15} {data['unit']:<10} {data['kamar']:<10}")
+            
+            print("=" * 75)
+            print(f"{'0':<5} Kembali")
+            print("=" * 75)
+
+            print("Masukkan ID akun yang ingin dihapus :")
+            print("=" * 75)
+            pilih_menu = input("> ")
+            print("=" * 75)
+
+            clear()
+
+            if pilih_menu == "0": 
+                break
+            for id_penyewa, data_penyewa in dataPenyewa.items(): 
+                if pilih_menu == id_penyewa: 
+                    # Opsional -- Tambah Konfirmasi Hapus 
+                    print("=" * 75)
+                    print("KONFIRMASI HAPUS")
+                    print("=" * 75)
+
+                    del dataPenyewa[pilih_menu]
+                    data_lama = dataPenyewa
+                    data_baru = {}
+                    nomor = 1
+
+                    for _, data_akun in data_lama.items(): 
+                        new_id = f"PENYEWA{nomor}"
+                        data_baru[new_id] = data_akun
+                        nomor += 1
+
+                    dataPenyewa = data_baru
+                    selesai_delete = True
+                    break
+                # break
+            
+            if selesai_delete == True: 
+                break
+
+
+        except ValueError as e: 
+            print("=" * 75)
+            print(e)
+            print("=" * 75)
+            
+    # pass
 
 def akunPenyewa(): 
     while True: 
