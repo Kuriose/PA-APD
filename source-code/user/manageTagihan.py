@@ -104,6 +104,8 @@ def tampilkan_laporan_konfirmasi():
     print("=" * 75)
     input("Tekan Enter untuk kembali...")
 
+# Lanjut
+
 # aku nambahin fungsi buat liat tagihan mendatang
 def lihat_tagihan_mendatang():
     while True: 
