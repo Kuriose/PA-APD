@@ -20,8 +20,6 @@ dataPenyewa = {
     }
 }
 
-# Lanjut lanjut
-
 # dict dummy tagihan
 # tagihan = {
 #     "November 2025": {"jumlah": 1500000, "status": "Belum Bayar"},
