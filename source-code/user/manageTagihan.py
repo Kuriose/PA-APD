@@ -57,6 +57,8 @@ laporan_bayar = {
             "jumlah_pembayaran": 0, 
             "metode_pembayaran": ["1", "123"]
         }
+    },
+    "PENYEWA2": {
     }
 }
 
@@ -67,6 +69,7 @@ def buat_laporan_bayar():
     total_bayar = 0
     periode_bulan = []
     info_pembayaran = []
+    selesai_tambah = False
 
     # jumlah_periode = 0
     
@@ -163,11 +166,13 @@ def buat_laporan_bayar():
                 if pilih_pembayaran == "1": 
                     metode_bayar = "CASH"
                     no_nota = input("Masukkan Nomor Nota yang telah diberikan : ")
-                    info_pembayaran.append([metode_bayar, no_nota])
+                    info_pembayaran.append(metode_bayar)
+                    info_pembayaran.append(no_nota)
                 elif pilih_pembayaran == "2": 
                     metode_bayar = "TRANSFER"
                     no_ref = input("Masukkan Nomor referensi (No. Ref) pada resi transfer : ")
-                    info_pembayaran.append([metode_bayar, no_ref])
+                    info_pembayaran.append(metode_bayar)
+                    info_pembayaran.append(no_ref)
                 else:
                     print("Pilihan anda tidak valid")
 
@@ -175,20 +180,41 @@ def buat_laporan_bayar():
                 print(pilih_periode)
 
                 for id_penyewa, data_laporan in laporan_bayar.items(): 
-                    print(data_laporan['LB-1'])
-                    id_laporan = f"LB-{len(data_laporan) + 1}"
+                    print(data_laporan)
+                    if input_id == id_penyewa: 
+                        id_laporan = f"LB-{len(data_laporan) + 1}"
+                        break
+                
+                # laporan_bayar[input_id]= {
+                #     laporan_bayar[input_id][id_laporan] = {
+                #         "nama": nama_laporan, 
+                #         "unit": unit_laporan, 
+                #         "kamar": kamar_laporan, 
+                #         "jumlah_periode": pilih_periode, 
+                #         "periode": periode_bulan, 
+                #         "jumlah_pembayaran": total_bayar, 
+                #         "metode_pembayaran": info_pembayaran, 
+                #         "status": "DIAJUKAN"
+                #     }
+                # }
 
-                    data_laporan[id_laporan] = {
-                        "nama": nama_laporan, 
-                        "unit": unit_laporan, 
-                        "kamar": kamar_laporan, 
-                        "jumlah_periode": pilih_periode, 
-                        "periode": periode_bulan, 
-                        "jumlah_pembayaran": total_bayar, 
-                        "metode_pembayaran": info_pembayaran, 
-                        "status": "DIAJUKAN"
-                    }
-                    break
+                for id_penyewa, data_laporan in laporan_bayar.items(): 
+                    if id_penyewa == input_id: 
+                        print("BERHASIL")
+                        data_laporan[id_laporan] = {
+                            "nama": nama_laporan, 
+                            "unit": unit_laporan, 
+                            "kamar": kamar_laporan, 
+                            "jumlah_periode": pilih_periode, 
+                            "periode": periode_bulan, 
+                            "jumlah_pembayaran": total_bayar, 
+                            "metode_pembayaran": info_pembayaran, 
+                            "status": "DIAJUKAN"
+                        }
+                        selesai_tambah = True
+                    
+                    if selesai_tambah == True: 
+                        break
 
                 print(laporan_bayar)
                 print("Laporan Berhasil Dibuat!")
@@ -273,9 +299,36 @@ def buat_laporan_bayar():
     
 def tampilkan_laporan_konfirmasi():
     clear()
+    # print("=" * 75)
+    print("LAPORAN PEMBAYARAN")
     print("=" * 75)
-    print("LAPORAN KONFIRMASI PEMBAYARAN")
-    print("=" * 75)
+
+    id_input = input("Masukkan ID Penyewa : ")
+    # print(laporan_bayar)
+    for id_penyewa, data_laporan in laporan_bayar.items(): 
+        if id_input == id_penyewa: 
+            for key in data_laporan.keys(): 
+                print(f"ID Laporan : {key}")
+
+            # print(data_laporan['nama'])
+            # print("")
+
+    print("Masukkan ID Laporan yang ingin dilihat:")
+    pilih_key = input("> ")
+
+    for id_penyewa, data_laporan in laporan_bayar.items(): 
+        if id_input == id_penyewa: 
+            for key in data_laporan.keys(): 
+                if pilih_key == key: 
+                    print(f"ID Penyewa: {id_input}")
+                    print(f"Nama Penyewa: {data_laporan[pilih_key]['nama']}")
+                    print(f"Unit: {data_laporan[pilih_key]['unit']}")
+                    print(f"Kamar: {data_laporan[pilih_key]['kamar']}")
+                    print(f"Periode Pembayaran: {data_laporan[pilih_key]['jumlah_periode']} bulan")
+                    print(f"Jumlah Pembayaran: {data_laporan[pilih_key]['jumlah_pembayaran']}")
+                    print(f"Metode Pembayaran: {data_laporan[pilih_key]['metode_pembayaran'][0]}")
+                    print(f"Nomor Nota / Ref.: {data_laporan[pilih_key]['metode_pembayaran'][1]}")
+
     input("Tekan Enter untuk kembali...")
 
 # Lanjut
@@ -367,6 +420,39 @@ def hapus_bukti_pembayaran():
     print("=" * 75)
     print("HAPUS BUKTI PEMBAYARAN")
     print("=" * 75)
+
+    id_input = input("Masukkan ID Penyewa : ")
+    # print(laporan_bayar)
+    for id_penyewa, data_laporan in laporan_bayar.items(): 
+        if id_input == id_penyewa: 
+            for key in data_laporan.keys(): 
+                print(f"ID Laporan : {key}")
+
+            # print(data_laporan['nama'])
+            # print("")
+
+    print("Masukkan ID Laporan yang ingin dilihat:")
+    pilih_key = input("> ")
+
+    for id_penyewa, data_laporan in laporan_bayar.items(): 
+        if id_input == id_penyewa: 
+            for key in data_laporan.keys(): 
+                if pilih_key == key: 
+                    print(f"ID Penyewa: {id_input}")
+                    print(f"Nama Penyewa: {data_laporan[pilih_key]['nama']}")
+                    print(f"Unit: {data_laporan[pilih_key]['unit']}")
+                    print(f"Kamar: {data_laporan[pilih_key]['kamar']}")
+                    print(f"Periode Pembayaran: {data_laporan[pilih_key]['jumlah_periode']} bulan")
+                    print(f"Jumlah Pembayaran: {data_laporan[pilih_key]['jumlah_pembayaran']}")
+                    print(f"Metode Pembayaran: {data_laporan[pilih_key]['metode_pembayaran'][0]}")
+                    print(f"Nomor Nota / Ref.: {data_laporan[pilih_key]['metode_pembayaran'][1]}")
+
+    print("Apakah Anda Ingin Menghapus Laporan ini? (y/n)")
+    konfir_hapus = input("> ")
+
+    if konfir_hapus == "y": 
+        del laporan_bayar[id_input][pilih_key]
+
     input("Tekan Enter untuk kembali...")
 
 # Menu Kelola Tagihan
@@ -398,5 +484,7 @@ def kelolaTagihan():
             riwayat_pembayaran()
         elif pilih == "5":
             hapus_bukti_pembayaran()
+        elif pilih == "6": 
+            tampilkan_laporan_konfirmasi()
         else:
             print("Pilihan tidak valid.")
