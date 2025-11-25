@@ -21,7 +21,41 @@ def lihatKamar_kosong():
     pass
 
 def lihatTagihan_lunas():
-    pass
+    clear()
+    if not tagihan:
+        print("Belum ada user terdaftar.")
+        input("Tekan Enter untuk kembali...")
+        return
+
+    # Tampilkan daftar user yang ada
+    print("Daftar User yang Memiliki Tagihan:")
+    for username in tagihan:
+        print(f"- {username}")
+
+    # Masukkan Nama User yang ingin di edit
+    user = input("Masukkan Nama User: ").strip()
+    if user == "":
+        print("Nama tidak boleh kosong!")
+        input("Tekan Enter untuk kembali...")
+        return
+
+    if user not in tagihan:
+        print("User tidak ditemukan.")
+        print("Pastikan mengetik sesuai dengan daftar yang tertera")
+        input("Tekan Enter untuk kembali...")
+        return
+
+    # Ambil data tagihan user
+    tagihan_user = tagihan[user]
+
+    # Tampilkan daftar bulan tagihan untuk user ini
+    print(f"Daftar tagihan untuk {user}:")
+    for bulan, info in tagihan_user.items():
+        status = info["status"]
+        jumlah = info["jumlah"]
+        print(f"- {bulan} : Rp{jumlah:,} ({status})")
+
+    input("Tekan Enter untuk kembali...")
 
 def lihatKeluhan_penyewa():
     clear()
@@ -42,6 +76,7 @@ def lihatKeluhan_penyewa():
 
 # Asli aku belum tambahin error handling nya baru logika utamanya jadi agak kurang 
 def editStatus():
+    clear()
     # Cek apakah ada tagihan user
     if not tagihan:
         print("Belum ada user terdaftar.")
