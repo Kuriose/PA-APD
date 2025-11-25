@@ -11,7 +11,7 @@ def ubah_data_akun():
     print("[1] - Ubah Username")
     print("[2] - Ubah Password")
     print("[0] - Kembali ke Menu Sebelumnya")
-    pilih = input("> ").strip
+    pilih = input("> ").strip()
 
     if pilih == "1":
         username_baru = input("Masukkan Username Yang Baru: ").strip
@@ -49,7 +49,50 @@ def ubah_data_akun():
         print("Pilihan Tidak Valid")
 
 def ubah_data_pribadi():
-    pass
+    clear()
+    print("=" * 75)
+    print("UBAH DATA PRIBADI")
+    print("=" * 75)
+    print("[1] - Ubah Nama Lengkap")
+    print("[2] - Ubah Email")
+    print("[3] - Ubah Nomor Telepon")
+    print("[0] - Kembali ke Menu Sebelumnya")
+    pilih = input("> ").strip()
+
+    if pilih == "1":
+        nama_baru = input("Masukkan Nama Lengkap Baru: ").strip()
+        if not nama_baru:
+            print("Nama tidak boleh kosong")
+        else:
+            akun.daftarAkun["nama"] = nama_baru
+            print("Nama berhasil diubah!")
+
+    elif pilih == "2":
+        email_baru = input("Masukkan Email Baru: ").strip()
+        if not email_baru:
+            print("Email tidak boleh kosong")
+        elif "@" not in email_baru:
+            print("Format email tidak valid")
+        else:
+            akun.daftarAkun["email"] = email_baru
+            print("Email berhasil diubah!")
+
+    elif pilih == "3":
+        nohp_baru = input("Masukkan Nomor Telepon Baru: ").strip()
+        if not nohp_baru:
+            print("Nomor telepon tidak boleh kosong")
+        elif not nohp_baru.isdigit():
+            print("Nomor telepon hanya boleh berisi angka")
+        else:
+            akun.daftarAkun["telepon"] = nohp_baru
+            print("Nomor telepon berhasil diubah!")
+
+    elif pilih == "0":
+        return
+
+    else:
+        print("Pilihan tidak valid")
+
 
 # Menu Kelola Akun
 def kelolaAkun():
@@ -62,7 +105,7 @@ def kelolaAkun():
         print("[2] - Ubah Data Pribadi")
         print("[0] - Kembali ke Menu Sebelumnya")
         print("=" * 75)
-        pilih = input("> ").strip
+        pilih = input("> ").strip()
 
         if pilih == "0":
             break
