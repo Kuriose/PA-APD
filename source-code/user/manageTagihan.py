@@ -278,69 +278,28 @@ def tampilkan_laporan_konfirmasi():
 def lihat_tagihan_mendatang():
     while True: 
         clear()
-        print(f"{'ID Penyewa':<15} {'Nama Lengkap':<25} {'Kontak':<15} {'Tanggal Gabung':<20} {'Status':<15} {'Unit':<10} {'Kamar':<10}")
-        for id_penyewa, data in dataPenyewa.items(): 
-            print(f"{str(id_penyewa):<15} {data['nama']:<25} {data['kontak']:<15} {data['tanggal_gabung']:<20} {data['status']:<15} {data['unit']:<10} {data['kamar']:<10}")
-
         print("=" * 75)
-        print(f"{'0':<15} Keluar")
+        print("TAGIHAN YANG AKAN DATANG")
         print("=" * 75)
-
-        input_id = input("Masukkan ID : ")
-        clear()
-
-        if input_id == "0": 
-            break
-        for id_penyewa, info_penyewa in dataPenyewa.items(): 
-            if input_id == id_penyewa:
-                print("=" * 75)
-                print("TAGIHAN YANG AKAN DATANG")
-                print("=" * 75)
-                
-                # ini buat dibuat kayak struk kebawah atau tetap ke samping kasih tau aja
-                ada_tagihan = False
-                for id_penyewa, data_penyewa in tagihan.items(): 
-                    if input_id == id_penyewa: 
-                        for id_tagihan, data_tagihan in data_penyewa.items():
-                            if data_tagihan['status'] == "BELUM BAYAR": 
-                                print("tahun     :", data_tagihan["tahun"])
-                                print("Bulan     :", data_tagihan["bulan"])
-                                print("Jumlah    : Rp", data_tagihan["jumlah"])
-                                print("Status    :", data_tagihan["status"])
-                                print("-" * 75)
-                                ada_tagihan = True                            
-
-                # for id_tagihan, data_tagihan in tagihan.items(): 
-                #     print(id_tagihan)
-                #     if input_id == id_tagihan: 
-                #         print("tahun     :", data_tagihan["tahun"])
-                #         print("Bulan     :", data_tagihan["bulan"])
-                #         print("Jumlah    : Rp", data_tagihan["jumlah"])
-                #         print("Status    :", data_tagihan["status"])
-                #         print("-" * 75)
-                #         ada_tagihan = True
-
-                # for id_tagihan, data_tagihan in tagihan.items(): 
-                #     if tagihan[id_tagihan]['status'] == "BELUM BAYAR": 
-                #         print("tahun     :", tagihan[id_tagihan]["tahun"])
-                #         print("Bulan     :", tagihan[id_tagihan]["bulan"])
-                #         print("Jumlah    : Rp", tagihan[id_tagihan]["jumlah"])
-                #         print("Status    :", tagihan[id_tagihan]["status"])
-                #         print("-" * 75)
-                #         ada_tagihan = True            
-
-                # for i in range(len(tagihan)):
-                #     if tagihan[i]["status"] == "Belum Bayar":
-                #         print("Bulan     :", tagihan[i]["bulan"])
-                #         print("Jumlah    : Rp", tagihan[i]["jumlah"])
-                #         print("Status    :", tagihan[i]["status"])
-                #         print("-" * 75)
-                #         ada_tagihan = True
-                
-                if not ada_tagihan:
-                    print("Tidak ada tagihan yang akan datang.")
-                
-                input("Tekan Enter untuk kembali...")
+        
+        # ini buat dibuat kayak struk kebawah atau tetap ke samping kasih tau aja
+        ada_tagihan = False
+        for id_penyewa, data_penyewa in tagihan.items(): 
+            if auth.id_login == id_penyewa: 
+                for id_tagihan, data_tagihan in data_penyewa.items():
+                    if data_tagihan['status'] == "BELUM BAYAR": 
+                        print("tahun     :", data_tagihan["tahun"])
+                        print("Bulan     :", data_tagihan["bulan"])
+                        print("Jumlah    : Rp", data_tagihan["jumlah"])
+                        print("Status    :", data_tagihan["status"])
+                        print("-" * 75)
+                        ada_tagihan = True                            
+        
+        if not ada_tagihan:
+            print("Tidak ada tagihan yang akan datang.")
+        
+        input("Tekan Enter untuk kembali...")
+        break
 
 def riwayat_pembayaran():
     while True:
