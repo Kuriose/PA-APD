@@ -278,7 +278,7 @@ def tampilkan_laporan_konfirmasi():
 def lihat_tagihan_mendatang():
     while True: 
         clear()
-        print("=" * 75)
+        # print("=" * 75)
         print("TAGIHAN YANG AKAN DATANG")
         print("=" * 75)
         
