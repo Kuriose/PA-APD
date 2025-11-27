@@ -30,34 +30,6 @@ def login():
         else: 
             print("Login gagal, silahkan coba lagi!")
 
-def register():
-    clear()
-    print("=== REGISTER ===")
-    username = input("Masukkan username: ").strip()
-    password = input("Masukkan password: ").strip()
-
-# ini buat ngecek kosong atau ngga nya data login
-    if not username or not password:
-        print("Username dan password tidak boleh kosong!")
-        return False
-
-    id_penyewa = f"PENYEWA{len(dataPenyewa) + 1}"
-
-    dataPenyewa[id_penyewa] = {
-    "username": username,
-    "password": password,
-    "role": "MEMBER",
-
-    # Data tambahan penyewa (isi dengan input atau default)
-    "nama": "",
-    "kontak": "",
-    "email": "",
-    "tanggal_gabung": "",
-    "status": "AKTIF",
-    "unit": "",
-    "kamar": ""
-    }
-
     print("Data penyewa berhasil ditambahkan!")
     print(f"ID Penyewa: {id_penyewa}")
 
