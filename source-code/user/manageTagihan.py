@@ -1,66 +1,7 @@
 # Manajemen Pembayaran & Tagihan
 from fungsi.utilitas import clear
-
-dataPenyewa = {
-    "PENYEWA1": {
-        "nama": "Ivan Konev", 
-        "kontak": "0XXX-XXXX-XXXX",
-        "tanggal_gabung": "2 November 2025", 
-        "status": "AKTIF", 
-        "unit": "KS01", 
-        "kamar": "A1"
-        }, 
-    "PENYEWA2": {
-        "nama": "Georgy Zhukov", 
-        "kontak": "0XXX-XXXX-XXXX",
-        "tanggal_gabung": "10 November 2025", 
-        "status": "AKTIF", 
-        "unit": "KN01", 
-        "kamar": "-"
-    }
-}
-
-# dict dummy tagihan
-# tagihan = {
-#     "November 2025": {"jumlah": 1500000, "status": "Belum Bayar"},
-#     "Desember 2025": {"jumlah": 1500000, "status": "Belum Bayar"},
-#     "Oktober 2025": {"jumlah": 1500000, "status": "Sudah Bayar"},
-# 
-
-# tagihan = {
-#     "TGHN01": {"tahun": "2025", "bulan": "November", "jumlah": 1500000, "status": "BELUM BAYAR"},
-#     "TGHN02": {"tahun": "2025", "bulan": "Desember", "jumlah": 1500000, "status": "BELUM BAYAR"}, 
-#     "TGHN03": {"tahun": "2025", "bulan": "November", "jumlah": 1500000, "status": "BAYAR"},
-# }
-
-tagihan = {
-    "PENYEWA1": {
-        "TGHN01": {"tahun": "2025", "bulan": "November", "jumlah": 1500000, "status": "BELUM BAYAR"},
-        "TGHN02": {"tahun": "2025", "bulan": "Desember", "jumlah": 1500000, "status": "BELUM BAYAR"},
-        "TGHN03": {"tahun": "2025", "bulan": "Oktober", "jumlah": 1500000, "status": "BAYAR"},     
-    }, 
-    "PENYEWA2": {
-        "TGHN01": {"tahun": "2025", "bulan": "November", "jumlah": 1500000, "status": "BAYAR"},
-        "TGHN02": {"tahun": "2025", "bulan": "Desember", "jumlah": 1500000, "status": "BELUM BAYAR"},
-        "TGHN03": {"tahun": "2025", "bulan": "Oktober", "jumlah": 1500000, "status": "BAYAR"},     
-    }
-}
-
-laporan_bayar = {
-    "PENYEWA1": {
-        "LB-1": {
-            "nama": "", 
-            "unit": "", 
-            "kamar": "", 
-            "jumlah_periode": "", 
-            "periode": ["", ""], 
-            "jumlah_pembayaran": 0, 
-            "metode_pembayaran": ["1", "123"]
-        }
-    },
-    "PENYEWA2": {
-    }
-}
+import auth
+from akun import dataPenyewa, tagihan, laporan_bayar
 
 # Untuk Sementara Fungsi Fungsi nya Masih Kosong
 def buat_laporan_bayar(): 
@@ -407,40 +348,59 @@ def riwayat_pembayaran():
         print("=" * 75)
         print("RIWAYAT PEMBAYARAN")
         print("=" * 75)
+
+        ada_riwayat = False
+        for id_penyewa, data_penyewa in tagihan.items(): 
+            if auth.id_login == id_penyewa: 
+                for id_tagihan, data_tagihan in data_penyewa.items():
+                    if data_tagihan['status'] == "SUDAH BAYAR": 
+                        print("tahun     :", data_tagihan["tahun"])
+                        print("Bulan     :", data_tagihan["bulan"])
+                        print("Jumlah    : Rp", data_tagihan["jumlah"])
+                        print("Status    :", data_tagihan["status"])
+                        print("-" * 75)
+                        ada_riwayat = True                            
         
-        clear()
-        print(f"{'ID Penyewa':<15} {'Nama Lengkap':<25} {'Kontak':<15} {'Tanggal Gabung':<20} {'Status':<15} {'Unit':<10} {'Kamar':<10}")
-        for id_penyewa, data in dataPenyewa.items(): 
-                print(f"{str(id_penyewa):<15} {data['nama']:<25} {data['kontak']:<15} {data['tanggal_gabung']:<20} {data['status']:<15} {data['unit']:<10} {data['kamar']:<10}")
+        if not ada_riwayat:
+            print("Tidak ada tagihan yang akan datang.")
 
-        print("=" * 75)
-        print(f"{'0':<15} Keluar")
-        print("=" * 75)
+        input("Tekan ENTER untuk melanjutkan")
+        break
 
-        input_id = input("Masukkan ID : ")
-        clear()
 
-        if input_id == "0": 
-            break
-        for id_penyewa, info_penyewa in dataPenyewa.items(): 
-            if input_id == id_penyewa:
-                print("=" * 75)
-                print("TAGIHAN YANG AKAN DATANG")
-                print("=" * 75)
+        # clear()
+        # print(f"{'ID Penyewa':<15} {'Nama Lengkap':<25} {'Kontak':<15} {'Tanggal Gabung':<20} {'Status':<15} {'Unit':<10} {'Kamar':<10}")
+        # for id_penyewa, data in dataPenyewa.items(): 
+        #         print(f"{str(id_penyewa):<15} {data['nama']:<25} {data['kontak']:<15} {data['tanggal_gabung']:<20} {data['status']:<15} {data['unit']:<10} {data['kamar']:<10}")
+
+        # print("=" * 75)
+        # print(f"{'0':<15} Keluar")
+        # print("=" * 75)
+
+        # input_id = input("Masukkan ID : ")
+        # clear()
+
+        # if input_id == "0": 
+        #     break
+        # for id_penyewa, info_penyewa in dataPenyewa.items(): 
+        #     if input_id == id_penyewa:
+        #         print("=" * 75)
+        #         print("TAGIHAN YANG AKAN DATANG")
+        #         print("=" * 75)
                 
-                # ini buat dibuat kayak struk kebawah atau tetap ke samping kasih tau aja
-                ada_tagihan = False
-                for id_penyewa, data_penyewa in tagihan.items(): 
-                    if input_id == id_penyewa: 
-                        for id_tagihan, data_tagihan in data_penyewa.items():
-                            if data_tagihan['status'] == "BAYAR": 
-                                print("tahun     :", data_tagihan["tahun"])
-                                print("Bulan     :", data_tagihan["bulan"])
-                                print("Jumlah    : Rp", data_tagihan["jumlah"])
-                                print("Status    :", data_tagihan["status"])
-                                print("-" * 75)
-                                ada_tagihan = True
-            input("Tekan Enter untuk kembali...")
+        #         # ini buat dibuat kayak struk kebawah atau tetap ke samping kasih tau aja
+        #         ada_tagihan = False
+        #         for id_penyewa, data_penyewa in tagihan.items(): 
+        #             if input_id == id_penyewa: 
+        #                 for id_tagihan, data_tagihan in data_penyewa.items():
+        #                     if data_tagihan['status'] == "BAYAR": 
+        #                         print("tahun     :", data_tagihan["tahun"])
+        #                         print("Bulan     :", data_tagihan["bulan"])
+        #                         print("Jumlah    : Rp", data_tagihan["jumlah"])
+        #                         print("Status    :", data_tagihan["status"])
+        #                         print("-" * 75)
+        #                         ada_tagihan = True
+        #     input("Tekan Enter untuk kembali...")
 
 def status_kontrakan():
     clear()

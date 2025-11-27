@@ -53,11 +53,11 @@ tagihan = {
         "TGHN02": {"tahun": "2025", "bulan": "Desember", "jumlah": 1500000, "status": "BELUM BAYAR"},
         "TGHN03": {"tahun": "2025", "bulan": "Oktober", "jumlah": 1500000, "status": "SUDAH BAYAR"},     
     },
-    "PENYEWA3": {
-        "TGHN01": {"tahun": "2025", "bulan": "November", "jumlah": 1500000, "status": "BELUM BAYAR"},
-        "TGHN02": {"tahun": "2025", "bulan": "Desember", "jumlah": 1500000, "status": "BELUM BAYAR"},
-        "TGHN03": {"tahun": "2025", "bulan": "Oktober", "jumlah": 1500000, "status": "SUDAH BAYAR"},     
-    }
+    # "PENYEWA3": {
+    #     "TGHN01": {"tahun": "2025", "bulan": "November", "jumlah": 1500000, "status": "BELUM BAYAR"},
+    #     "TGHN02": {"tahun": "2025", "bulan": "Desember", "jumlah": 1500000, "status": "BELUM BAYAR"},
+    #     "TGHN03": {"tahun": "2025", "bulan": "Oktober", "jumlah": 1500000, "status": "SUDAH BAYAR"},     
+    # }
 }
 
 laporan_keluhan = {
@@ -85,18 +85,18 @@ laporan_keluhan = {
             "status": ""
         }
     },
-    "PENYEWA3": {
-        "LK-1": {
-            "nama": "",
-            "unit": "",
-            "kamar": "", 
-            "kategori": "", 
-            "judul_laporan": "", 
-            "deskripsi_laporan": "", 
-            "tanggal_dibuat": "", 
-            "status": ""
-        }
-    }
+    # "PENYEWA3": {
+    #     "LK-1": {
+    #         "nama": "",
+    #         "unit": "",
+    #         "kamar": "", 
+    #         "kategori": "", 
+    #         "judul_laporan": "", 
+    #         "deskripsi_laporan": "", 
+    #         "tanggal_dibuat": "", 
+    #         "status": ""
+    #     }
+    # }
 }
 
 laporan_bayar = {
@@ -122,15 +122,15 @@ laporan_bayar = {
             "metode_pembayaran": ["1", "123"]
         }
     },
-    "PENYEWA1": {
-        "LB-1": {
-            "nama": "", 
-            "unit": "", 
-            "kamar": "", 
-            "jumlah_periode": "", 
-            "periode": ["", ""], 
-            "jumlah_pembayaran": 0, 
-            "metode_pembayaran": ["1", "123"]
-        }
-    },
+    # "PENYEWA1": {
+    #     "LB-1": {
+    #         "nama": "", 
+    #         "unit": "", 
+    #         "kamar": "", 
+    #         "jumlah_periode": "", 
+    #         "periode": ["", ""], 
+    #         "jumlah_pembayaran": 0, 
+    #         "metode_pembayaran": ["1", "123"]
+    #     }
+    # },
 }
