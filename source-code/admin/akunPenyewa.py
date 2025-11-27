@@ -1,64 +1,67 @@
-import fungsi
 from fungsi.utilitas import clear
+from akun import dataPenyewa
 
-# Akun Penyewa
-# 1 - Tambah Penyewa, 2 - Lihat data penyewa, 3 - Hapus Penyewa
+def tambahPenyewa():
+    clear()
+    print("=" * 75)
+    print("REGISTRASI PENYEWA BARU")
+    print("=" * 75)
 
-# Dummy Dictionary -- Bisa diganti nantinya
-dataPenyewa = {
-    "PENYEWA1": {
-        "nama": "Ivan Konev", 
-        "kontak": "0XXX-XXXX-XXXX",
-        "tanggal_gabung": "2 November 2025", 
-        "status": "AKTIF", 
-        "unit": "KS01", 
-        "kamar": "A1"
-        }, 
-    "PENYEWA2": {
-        "nama": "Georgy Zhukov", 
-        "kontak": "0XXX-XXXX-XXXX",
-        "tanggal_gabung": "10 November 2025", 
-        "status": "AKTIF", 
-        "unit": "KN01", 
-        "kamar": "-"
+    # Input username & password
+    username = input(f"{'Masukkan username':<40}: ").strip()
+    password = input(f"{'Masukkan password':<40}: ").strip()
+
+    # Validasi username dan password tidak boleh kosong
+    if not username or not password:
+        print("\nUsername dan password tidak boleh kosong!")
+        input("Tekan Enter untuk kembali...")
+        return False
+
+    # Cek username double
+    for info in dataPenyewa.values():
+        if info.get("username") == username:
+            print("\nUsername sudah digunakan! Silakan pilih yang lain.")
+            input("Tekan Enter untuk kembali...")
+            return False
+
+    # Input data penyewa
+    print("\n" + "=" * 75)
+    print("LENGKAPI DATA PENYEWA")
+    print("=" * 75)
+
+    nama = input(f"{'Nama Lengkap':<40}: ")
+    kontak = input(f"{'Kontak (No. HP)':<40}: ")
+    email = input(f"{'Email':<40}: ")
+    tanggal_gabung = input(f"{'Tanggal Gabung (contoh: 27 November 2025)':<40}: ")
+    unit = input(f"{'Unit (contoh: KS01)':<40}: ")
+    kamar = input(f"{'Nomor Kamar':<40}: ")
+
+    # Semua data wajib diisi(bisa dibuat validasi satu satu kalau ketua mau)
+    if not all([nama, kontak, email, tanggal_gabung, unit, kamar]):
+        print("\nSemua data wajib diisi!")
+        input("Tekan Enter untuk kembali...")
+        return False
+
+    # Menambahkan data penyewa ke dictionary
+    id_baru = f"PENYEWA{len(dataPenyewa) + 1}"
+
+    dataPenyewa[id_baru] = {
+        "username": username,
+        "password": password,
+        "role": "MEMBER",
+        "nama": nama,
+        "kontak": kontak,
+        "email": email,
+        "tanggal_gabung": tanggal_gabung,
+        "status": "AKTIF",
+        "unit": unit,
+        "kamar": kamar
     }
-}
 
-def tambahPenyewa(): 
-    while True:
-        try: 
-            print("=" * 75)
-            print("TAMBAH PENYEWA BARU")
-            print("=" * 75)
-
-            tambah_nama = input(f"{'Masukkan Nama Penyewa':<40}: ")
-            tambah_kontak = input(f"{'Masukkan Kontak Penyewa':<40}: ")
-            tanggal_gabung = input(f"{'Masukkan Tanggal Gabung Penyewa':<40}: ")
-            tambah_status = input(f"{'Masukkan Status Penyewa':<40}: ")
-            tambah_unit = input(f"{'Masukkan Unit Penyewa':<40}: ")
-            tambah_kamar = input(f"{'Masukkan Kamar Penyewa':<40}: ")
-            print("=" * 75)
-
-            clear()
-
-            if len(tambah_nama) != 0 and len(tambah_kontak) != 0 and len(tanggal_gabung) != 0 and len(tambah_status) != 0 and len(tambah_unit) != 0 and len(tambah_kamar) != 0: 
-                # Optional --- Bisa disini menampilkan Informasi Akun yang diberikan
-                id_penyewa_baru = f"PENYEWA{len(dataPenyewa) + 1}"
-
-                dataPenyewa[id_penyewa_baru] = {
-                    "nama": tambah_nama, 
-                    "kontak": tambah_kontak, 
-                    "tanggal_gabung": tanggal_gabung, 
-                    "status": tambah_status, 
-                    "unit": tambah_unit, 
-                    "kamar": tambah_kamar
-                }
-                break
-
-        except ValueError as e: 
-            print("=" * 75)
-            print(e)
-            print("=" * 75)
+    print("\nRegistrasi berhasil! Silakan login dengan akun Anda.")
+    input("Tekan Enter untuk melanjutkan...")
+    clear()
+    return True
 
 def lihatPenyewa(): 
     print("=" * 75)
